@@ -1,0 +1,11 @@
+version: '3'
+services:
+  python:
+      image: python:3.6
+      command: python -u -m http.server
+      working_dir: /app
+      volumes:
+        - .:/app
+      ports:
+        - "8000:8000"
+
