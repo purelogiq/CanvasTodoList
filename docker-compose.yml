@@ -1,11 +1,23 @@
 version: '3'
 services:
   python:
-      image: python:3.6
-      command: python -u -m http.server
-      working_dir: /app
-      volumes:
-        - .:/app
-      ports:
-        - "8000:8000"
-
+    image: python:3.6
+    command: python -u -m http.server
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+  webpack:
+    build:
+      context: ./
+      dockerfile: ./docker/webpack.dockerfile
+    command: npm run watch
+    working_dir: /app
+    volumes:
+      - ./webpack.dev.js:/app/webpack.dev.js
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./build:/app/build
+      - ./src:/app/src

@@ -1,19 +1,66 @@
 from invoke import task, call
 
+
 @task
-def start(ctx, detached=False):
-    cmd = "docker-compose up"
-    cmd = cmd + " -d" if detached else cmd
-    ctx.run(cmd, pty=True)
+def start(ctx):
+    """Start all services in the background.
+
+    Only starts or restarts services if they are not already running with latest changes.
+    """
+    ctx.run("docker-compose up -d", pty=True)
 
 
 @task
 def stop(ctx):
+    """Stop all running services."""
     ctx.run("docker-compose down")
 
 
-@task(pre=[call(start, detached=True)])
-def shell(ctx):
-    result = ctx.run("docker-compose ps | grep -o 'todomvctypedpixi_python_.'", hide=True)
+@task(
+    help={
+        "service": "The docker-compose service to show output for.",
+        "tail": "The amount of past output to include. Use 'all' to show all past output.",
+        "nofollow": "Exit immediately and do not show new output automatically.",
+    }
+)
+def show(ctx, service, tail=80, nofollow=False):
+    """Show the output of a service."""
+    cmd = (
+        f"docker-compose logs --tail={tail}{' ' if nofollow else ' -f '}{service}"
+    )
+    ctx.run(cmd, pty=True)
+
+
+@task(
+    help={
+        "service": "The docker-compose service to show output for.",
+    },
+    pre=[call(start)]
+)
+def shell(ctx, service):
+    """Attach to a service container to run commands in a shell."""
+    result = ctx.run(
+        f"docker-compose ps | grep -o '.*todomvctypedpixi_{service}_.'", hide=True
+    )
     container = result.stdout.strip()
     ctx.run(f"docker exec -it {container} /bin/bash", pty=True)
+
+
+@task()
+def rebuild(ctx):
+    """Forces a clean rebuild of all service images and containers."""
+    ctx.run("docker-compose build --no-cache")
+    ctx.run("docker-compose up --force-recreate -d")
+
+
+@task()
+def buildjs(ctx):
+    """Build all frontend files using webpack."""
+    ctx.run("docker-compose run webpack npm run build", pty=True)
+
+
+@task()
+def deletejsbuild(ctx):
+    """Delete the js build folder..."""
+    ctx.run("sudo rm -rf ./build/*")
+    ctx.run("sudo touch ./build/.gitignore")

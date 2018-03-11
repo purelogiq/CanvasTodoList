@@ -1,3 +1,9 @@
 # IntelliJ IDE Files
 .idea
 todomvc-typedpixi.iml
+
+# Build files
+build
+
+# Node modules
+node_modules

@@ -1,0 +1,34 @@
+{
+  "name": "todomvc-typedpixi",
+  "version": "1.0.0",
+  "description": "TodoMVC with Typescript and PixiJS",
+  "main": "index.html",
+  "scripts": {
+    "build": "webpack --mode development --config webpack.dev.js",
+    "watch": "webpack --watch --mode development --config webpack.dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/purelogiq/todomvc-typedpixi.git"
+  },
+  "keywords": [
+    "todomvc",
+    "pixi",
+    "pixijs",
+    "typescript",
+    "canvas"
+  ],
+  "author": "@purelogiq",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/purelogiq/todomvc-typedpixi/issues"
+  },
+  "homepage": "https://github.com/purelogiq/todomvc-typedpixi#readme",
+  "devDependencies": {
+    "ts-loader": "^4.0.1",
+    "typescript": "^2.7.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11"
+  },
+  "dependencies": {}
+}
