@@ -1,7 +1,7 @@
 {
-  "name": "todomvc-typedpixi",
+  "name": "CanvasTodoList",
   "version": "1.0.0",
-  "description": "TodoMVC with Typescript and PixiJS",
+  "description": "Todo List made with Typescript and PixiJS",
   "main": "index.html",
   "scripts": {
     "build": "webpack --mode development --config webpack.dev.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/purelogiq/todomvc-typedpixi.git"
+    "url": "git+https://github.com/purelogiq/CanvasTodoList.git"
   },
   "keywords": [
     "todomvc",
@@ -21,9 +21,9 @@
   "author": "@purelogiq",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/purelogiq/todomvc-typedpixi/issues"
+    "url": "https://github.com/purelogiq/CanvasTodoList/issues"
   },
-  "homepage": "https://github.com/purelogiq/todomvc-typedpixi#readme",
+  "homepage": "https://github.com/purelogiq/CanvasTodoList#readme",
   "devDependencies": {
     "ts-loader": "^4.0.1",
     "typescript": "^2.7.2",

@@ -38,10 +38,10 @@ def show(ctx, service=None, tail=80, nofollow=False):
     },
     pre=[call(start)]
 )
-def shell(ctx, service=None):
+def shell(ctx, service):
     """Attach to a service container to run commands in a shell."""
     result = ctx.run(
-        f"docker-compose ps | grep -o '.*todomvctypedpixi_{service}_.'", hide=True
+        f"docker-compose ps | grep -o '.*canvastodolist_{service}_.'", hide=True
     )
     container = result.stdout.strip()
     ctx.run(f"docker exec -it {container} /bin/bash", pty=True)

@@ -1,9 +1,12 @@
 # IntelliJ IDE Files
 .idea
-todomvc-typedpixi.iml
+CanvasTodoList.iml
 
 # Build files
 build
 
 # Node modules
 node_modules
+
+# Shell files
+.bash_history
