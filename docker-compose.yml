@@ -1,23 +1,29 @@
 version: '3'
 services:
   python:
-    image: python:3.6
+    build:
+      context: ./
+      dockerfile: ./docker/python.dockerfile
+      args:
+        - userid=${UID}
     command: python -u -m http.server
-    working_dir: /app
+    working_dir: /home/python
     volumes:
-      - .:/app
+      - .:/home/python
     ports:
       - "8000:8000"
   webpack:
     build:
       context: ./
       dockerfile: ./docker/webpack.dockerfile
+      args:
+        - userid=${UID}
     command: npm run watch
-    working_dir: /app
+    working_dir: /home/webpack
     volumes:
-      - ./webpack.dev.js:/app/webpack.dev.js
-      - ./tsconfig.json:/app/tsconfig.json
-      - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
-      - ./build:/app/build
-      - ./src:/app/src
+      - ./webpack.dev.js:/home/webpack/webpack.dev.js
+      - ./tsconfig.json:/home/webpack/tsconfig.json
+      - ./package.json:/home/webpack/package.json
+      - ./package-lock.json:/home/webpack/package-lock.json
+      - ./build:/home/webpack/build
+      - ./src:/home/webpack/src

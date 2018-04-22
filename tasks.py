@@ -18,12 +18,13 @@ def stop(ctx):
 
 @task(
     help={
-        "service": "The docker-compose service to show output for.",
-        "tail": "The amount of past output to include. Use 'all' to show all past output.",
+        "service": "The docker-compose service to show output for. If none, output from "
+                   "all services will be interleaved together.",
+        "tail": "Amount of past output to include. Use 'all' to show all past output.",
         "nofollow": "Exit immediately and do not show new output automatically.",
     }
 )
-def show(ctx, service, tail=80, nofollow=False):
+def show(ctx, service=None, tail=80, nofollow=False):
     """Show the output of a service."""
     cmd = (
         f"docker-compose logs --tail={tail}{' ' if nofollow else ' -f '}{service}"
@@ -37,7 +38,7 @@ def show(ctx, service, tail=80, nofollow=False):
     },
     pre=[call(start)]
 )
-def shell(ctx, service):
+def shell(ctx, service=None):
     """Attach to a service container to run commands in a shell."""
     result = ctx.run(
         f"docker-compose ps | grep -o '.*todomvctypedpixi_{service}_.'", hide=True
@@ -57,10 +58,3 @@ def rebuild(ctx):
 def buildjs(ctx):
     """Build all frontend files using webpack."""
     ctx.run("docker-compose run webpack npm run build", pty=True)
-
-
-@task()
-def deletejsbuild(ctx):
-    """Delete the js build folder..."""
-    ctx.run("sudo rm -rf ./build/*")
-    ctx.run("sudo touch ./build/.gitignore")
