@@ -6,7 +6,7 @@ learning exercise.
 ## Getting Started
 
 - Requires Linux/OSX, python 3, [invoke][], and [docker-compose][].
-- Add `export UID=$UID` to your `.bashrc`, `.bash_profile` or other shell startup file.
+- Add `export UID=$UID 2> /dev/null` to your `.bashrc`, or `.bash_profile`, or other shell startup file.
 - In the root of the project, run `invoke start`.
   - invoke and docker-compose take care of setting up ALL requirements for you!
 - Visit `localhost:8000`. Replace localhost with the ip of the host running docker if
