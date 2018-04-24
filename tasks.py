@@ -27,7 +27,7 @@ def stop(ctx):
 def show(ctx, service=None, tail=80, nofollow=False):
     """Show the output of a service."""
     cmd = (
-        f"docker-compose logs --tail={tail}{' ' if nofollow else ' -f '}{service}"
+        f"docker-compose logs --tail={tail}{' ' if nofollow else ' -f '}{service or ''}"
     )
     ctx.run(cmd, pty=True)
 
