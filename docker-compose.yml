@@ -7,9 +7,8 @@ services:
       args:
         - userid=${UID}
     command: python -u -m http.server
-    working_dir: /home/python
     volumes:
-      - .:/home/python
+      - ./webroot:/app
     ports:
       - "8000:8000"
   webpack:
@@ -19,11 +18,10 @@ services:
       args:
         - userid=${UID}
     command: npm run watch
-    working_dir: /home/webpack
     volumes:
-      - ./webpack.dev.js:/home/webpack/webpack.dev.js
-      - ./tsconfig.json:/home/webpack/tsconfig.json
-      - ./package.json:/home/webpack/package.json
-      - ./package-lock.json:/home/webpack/package-lock.json
-      - ./build:/home/webpack/build
-      - ./src:/home/webpack/src
+      - ./webpack.dev.js:/app/webpack.dev.js
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./webroot/.build:/app/build
+      - ./src:/app/src

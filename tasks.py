@@ -50,6 +50,7 @@ def shell(ctx, service):
 @task()
 def rebuild(ctx):
     """Forces a clean rebuild of all service images and containers."""
+    ctx.run("docker-compose down")
     ctx.run("docker-compose build --no-cache")
     ctx.run("docker-compose up --force-recreate -d")
 

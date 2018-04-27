@@ -3,7 +3,7 @@
 CanvasTodoList.iml
 
 # Build files
-build
+webroot/.build
 
 # Node modules
 node_modules
